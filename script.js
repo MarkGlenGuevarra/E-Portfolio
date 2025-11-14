@@ -1,3 +1,41 @@
+// Certificate Lightbox Functionality
+const modal = document.getElementById('certificateModal');
+const modalImg = document.getElementById('modalImage');
+const captionText = document.getElementById('caption');
+const closeBtn = document.querySelector('.close');
+
+// Add click event to all certificate images
+document.querySelectorAll('.certificate-img').forEach(img => {
+    img.addEventListener('click', function() {
+        modal.style.display = 'block';
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    });
+});
+
+// Close modal when clicking the close button
+closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Re-enable scrolling
+});
+
+// Close modal when clicking outside the image
+window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
